@@ -1,0 +1,103 @@
+
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="description" content=嘿，我是ZhaoWu～这是我的Blog. >
+  <meta name="keywords" content=hexo,Reverse,CTF >
+
+  <head>
+    <title>
+      IDAPython [ Hexo ]
+    </title>
+  <meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+
+    <link rel="stylesheet" href="/css/header.css">
+<div class="header">
+  <div class="logo">
+    <span class="pull-left">
+      <a id="site-name" href="/">
+        ZhaoWu&#39;s blog
+      </a>
+    </span>
+  </div>
+  <ul class="nav-list">
+    
+      <li>
+        <a href="/">
+          首页
+        </a>
+      </li>
+      
+  </ul>
+</div>
+
+      <!--<link rel="stylesheet" href="/css/top-header.css">
+<div id="top-bar" class="fixed">
+
+  <a class="goto-top" href="#"></a>
+  <ul class="bar-list bar-list-1">
+    
+      <li>
+        <p>
+          <a href="/">
+            <text class="bar-text bar-p1">
+              首页
+            </text>
+            <text class="bar-text bar-p2"></text>
+          </a>
+          <text class="bar-p3">/</text>
+        </p>
+      </li>
+      
+  </ul>
+</div>-->
+
+        <div id="content-outer">
+          <div class="content-inner">
+            <link rel="stylesheet" href="/css/post.css">
+<div class="posts">
+  <a href="/index.html"><i class="fa fa-home
+replay-btn" aria-hidden="true"></i></a>
+  <div class="post-title">
+    <p>
+      IDAPython
+    </p>
+    <hr>
+  </div>
+  <div class="post-content">
+    <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">ct=<span class="keyword">lambda</span> :idaapi.run_requests()</span><br><span class="line">st=<span class="keyword">lambda</span> :idaapi.request_step_over()</span><br><span class="line">rt=<span class="keyword">lambda</span> :[idaapi.request_step_until_ret(),ct()]</span><br><span class="line">rn=<span class="keyword">lambda</span> :[idaapi.request_continue_process(),ct()]</span><br><span class="line">A=<span class="number">0</span></span><br><span class="line">B=<span class="number">0</span></span><br><span class="line">log=[]</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">parse</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">global</span> A,B</span><br><span class="line">    x&amp;=<span class="number">0xfff</span></span><br><span class="line">    <span class="keyword">if</span> x <span class="keyword">in</span> [<span class="number">0x510</span>,<span class="number">0xecd</span>,<span class="number">0x7dc</span>,<span class="number">0xa1c</span>]:</span><br><span class="line">        A+=<span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> x <span class="keyword">in</span> [<span class="number">0xae2</span>,<span class="number">0x3a9</span>,<span class="number">0x940</span>]:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="comment">#print(&quot;B=input[%d]&quot;%A)</span></span><br><span class="line">    <span class="keyword">elif</span> x <span class="keyword">in</span> [<span class="number">0x276</span>,<span class="number">0x87b</span>,<span class="number">0xd38</span>]:</span><br><span class="line">        A-=<span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> x <span class="keyword">in</span> [<span class="number">0x48a</span>,<span class="number">0x402</span>,<span class="number">0xf93</span>,<span class="number">0x1fe</span>]:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;input[%d]^=%d&quot;</span>%(A,B))</span><br><span class="line">    <span class="keyword">elif</span> x <span class="keyword">in</span> [<span class="number">0xc7b</span>,<span class="number">0x576</span>,<span class="number">0x7be</span>]:</span><br><span class="line">        B=<span class="number">0</span></span><br><span class="line">    <span class="keyword">elif</span> x <span class="keyword">in</span> [<span class="number">0x8a2</span>,<span class="number">0x2da</span>,<span class="number">0x07f</span>,<span class="number">0x33c</span>,<span class="number">0x633</span>,<span class="number">0x712</span>,<span class="number">0xdfe</span>,<span class="number">0x6f8</span>,<span class="number">0x968</span>,<span class="number">0xbb5</span>]:</span><br><span class="line">        B+=<span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> x <span class="keyword">in</span> [<span class="number">0x5e1</span>,<span class="number">0x145</span>]:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;input[%d] = (input[%d] &gt;&gt; %d) | (input[%d] &lt;&lt; %d)&quot;</span>%(A,A,B,A,<span class="number">8</span>-B))</span><br><span class="line">    <span class="keyword">elif</span> x <span class="keyword">in</span> [<span class="number">0x5d6</span>]:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;-----The End----&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;What?&quot;</span>,<span class="built_in">hex</span>(x)[<span class="number">2</span>:])</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>():</span><br><span class="line">    rt()</span><br><span class="line">    [st() <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">25</span>)]</span><br><span class="line">    ct()</span><br><span class="line">    ida_dbg.wait_for_next_event(ida_dbg.WFNE_SUSP,-<span class="number">1</span>)</span><br><span class="line">    s=idaapi.get_reg_val(<span class="string">&quot;rsi&quot;</span>)</span><br><span class="line">    log.append([<span class="built_in">hex</span>(idaapi.get_reg_val(<span class="string">&quot;rip&quot;</span>)),<span class="built_in">hex</span>(get_wide_byte(idaapi.get_reg_val(<span class="string">&quot;rip&quot;</span>))),<span class="built_in">hex</span>(s)])</span><br><span class="line">    parse(s)</span><br><span class="line">    rn()</span><br><span class="line">    ida_dbg.wait_for_next_event(ida_dbg.WFNE_SUSP,-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    parse(<span class="number">0x510</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        f()</span><br><span class="line"><span class="keyword">except</span> Exception:</span><br><span class="line">    <span class="built_in">print</span>(log)</span><br></pre></td></tr></table></figure>
+
+  </div>
+  
+</div>
+          </div>
+        </div>
+
+        <link rel="stylesheet" href="/css/footer.css">
+<div class="bottom-outer">
+  <div class="copyright">©2021 - 2021 By Tanger</div>
+  <div class="framework-info">
+    <span>Power by</span>
+    <a class="a1" target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>
+    <span class="footer-separator">|</span>
+    <span>Theme by</span>
+    <a class="a2" target="_blank" rel="noopener" href="https://github.com/redhat123456/hexo-theme-MiHoYo">MiHoYo</a>
+  </div>
+</div>
+
+          
+            <!-- scripts list from theme config.yml -->
+            
+              <script src="/js/MiHoYo.js"></script>
+              
+                
+
+  </body>
+
+  </html>
